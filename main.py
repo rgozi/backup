@@ -1,5 +1,4 @@
 import os
-import pathlib
 import shutil
 from datetime import datetime
 
@@ -11,7 +10,7 @@ DEFAULT_BACKUP_FOLDER = f'C:\\Users\\{HOSTNAME}\\AppData\\Romaing\\mybackup\\'
 def new_backup():
     current_timestamp = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
     archive_folder = DEFAULT_ARCHIVE_FOLDER
-    target_folder = pathlib.Path.joinpath(DEFAULT_BACKUP_FOLDER, current_timestamp)
+    target_folder = os.path.join(DEFAULT_BACKUP_FOLDER, current_timestamp)
     shutil.copytree(archive_folder, target_folder)
     print(f'new backup:{current_timestamp} generated')
 
@@ -24,7 +23,7 @@ def list_backup():
 
 def load_backup(backup_name: str):
     shutil.rmtree(DEFAULT_ARCHIVE_FOLDER)
-    target_folder = pathlib.Path.joinpath(DEFAULT_BACKUP_FOLDER, backup_name)
+    target_folder = os.path.join(DEFAULT_BACKUP_FOLDER, backup_name)
     shutil.copytree(target_folder, DEFAULT_ARCHIVE_FOLDER)
     print(f'use backup:{backup_name}')
 
@@ -33,11 +32,13 @@ def make_choice(min_value: int, max_value: int):
     while True:
         try:
             choice = input(f'input a number from {min_value} to {max_value} to make a choice:')
+            choice = int(choice)
             if choice not in range(min_value, max_value + 1):
                 raise Exception(f'unknown choice: {choice}')
         except Exception as e:
             print(e)
         else:
+            print(choice)
             return choice
 
 
