@@ -2,13 +2,12 @@ import os
 import shutil
 from datetime import datetime
 
-HOSTNAME = os.uname()[1]
-DEFAULT_ARCHIVE_FOLDER = f'C:\\Users\\{HOSTNAME}\\AppData\\Romaing\\DarkSoulsIII\\'
-DEFAULT_BACKUP_FOLDER = f'C:\\Users\\{HOSTNAME}\\AppData\\Romaing\\mybackup\\'
+DEFAULT_ARCHIVE_FOLDER = r'C:\Users\ergo\AppData\Roaming\DarkSoulsIII'
+DEFAULT_BACKUP_FOLDER = r'C:\Users\ergo\AppData\Roaming\mybackup'
 
 
 def new_backup():
-    current_timestamp = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
+    current_timestamp = datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
     archive_folder = DEFAULT_ARCHIVE_FOLDER
     target_folder = os.path.join(DEFAULT_BACKUP_FOLDER, current_timestamp)
     shutil.copytree(archive_folder, target_folder)
